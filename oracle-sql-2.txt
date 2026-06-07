@@ -1,0 +1,502 @@
+
+SQL*Plus: Release 11.2.0.2.0 Production on Sat Jun 6 10:52:42 2026
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect system
+Enter password:
+Connected.
+SQL> select * from emp;
+
+     EMPID EMPNAME         EMPCITY        EMPSAL PINCOD
+---------- --------------- ---------- ---------- ------
+         1 Rahul           Pune            45000
+         2 Priya           Mumbai        52000.5
+         3 Amit            Delhi        48000.75
+         4 kunal           pune            30000 411001
+         5 vanshika        mumbai          25000 441110
+         6 manushree       ecity           10000 441110
+         7 ashwini         hyderabad       15000 445206
+
+7 rows selected.
+
+SQL> select * from emp;
+
+     EMPID EMPNAME         EMPCITY        EMPSAL PINCOD
+---------- --------------- ---------- ---------- ------
+         1 Rahul           Pune            45000
+         2 Priya           Mumbai        52000.5
+         3 Amit            Delhi        48000.75
+         4 kunal           pune            30000 411001
+         5 vanshika        mumbai          25000 441110
+         6 manushree       ecity           10000 441110
+         7 ashwini         hyderabad       15000 445206
+
+7 rows selected.
+
+SQL> select * from emp2;
+
+     EMPID EMPNAME         EMPCITY        EMPSAL PINCOD
+---------- --------------- ---------- ---------- ------
+         1 Rahul           Pune            45000
+         2 Priya           Mumbai        52000.5
+         3 Amit            Delhi        48000.75
+         4 kunal           pune            30000 411001
+         5 vanshika        mumbai          25000 441110
+         6 manushree       ecity           10000 441110
+         7 ashwini         hyderabad       15000 445206
+
+7 rows selected.
+
+SQL> select * from emp4;
+
+     EMPID EMPNAME         EMPCITY        EMPSAL
+---------- --------------- ---------- ----------
+         1 Rahul           Pune            45000
+         2 Priya           Mumbai        52000.5
+         3 Amit            Delhi        48000.75
+
+SQL> insert into emp4 values(4,'Punam','Raipur',60000);
+
+1 row created.
+
+SQL> select * from emp4;
+
+     EMPID EMPNAME         EMPCITY        EMPSAL
+---------- --------------- ---------- ----------
+         1 Rahul           Pune            45000
+         2 Priya           Mumbai        52000.5
+         3 Amit            Delhi        48000.75
+         4 Punam           Raipur          60000
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from emp4;
+
+     EMPID EMPNAME         EMPCITY        EMPSAL
+---------- --------------- ---------- ----------
+         1 Rahul           Pune            45000
+         2 Priya           Mumbai        52000.5
+         3 Amit            Delhi        48000.75
+         4 Punam           Raipur          60000
+
+SQL> update emp4 set empcity='Pune' where empid=4;
+
+1 row updated.
+
+SQL> select * from emp4;
+
+     EMPID EMPNAME         EMPCITY        EMPSAL
+---------- --------------- ---------- ----------
+         1 Rahul           Pune            45000
+         2 Priya           Mumbai        52000.5
+         3 Amit            Delhi        48000.75
+         4 Punam           Pune            60000
+
+SQL> savepoint A;
+
+Savepoint created.
+
+SQL> insert into emp4 values(5,'Richa','Raipur',18000);
+
+1 row created.
+
+SQL> savepoint B;
+
+Savepoint created.
+
+SQL> select * from emp4;
+
+     EMPID EMPNAME         EMPCITY        EMPSAL
+---------- --------------- ---------- ----------
+         1 Rahul           Pune            45000
+         2 Priya           Mumbai        52000.5
+         3 Amit            Delhi        48000.75
+         4 Punam           Pune            60000
+         5 Richa           Raipur          18000
+
+SQL> rollback to B;
+
+Rollback complete.
+
+SQL> select * from emp4;
+
+     EMPID EMPNAME         EMPCITY        EMPSAL
+---------- --------------- ---------- ----------
+         1 Rahul           Pune            45000
+         2 Priya           Mumbai        52000.5
+         3 Amit            Delhi        48000.75
+         4 Punam           Pune            60000
+         5 Richa           Raipur          18000
+
+SQL> rollback to A;
+
+Rollback complete.
+
+SQL> select * from emp4;
+
+     EMPID EMPNAME         EMPCITY        EMPSAL
+---------- --------------- ---------- ----------
+         1 Rahul           Pune            45000
+         2 Priya           Mumbai        52000.5
+         3 Amit            Delhi        48000.75
+         4 Punam           Pune            60000
+
+SQL> select 10+20 from dual;
+
+     10+20
+----------
+        30
+
+SQL> select sysdate from dual;
+
+SYSDATE
+---------
+06-JUN-26
+
+SQL> select * from emp4 where ecity='pune';
+select * from emp4 where ecity='pune'
+                         *
+ERROR at line 1:
+ORA-00904: "ECITY": invalid identifier
+
+
+SQL> select * from emp4 where empcity='pune';
+
+no rows selected
+
+SQL> select * from emp4 where empcity='Pune';
+
+     EMPID EMPNAME         EMPCITY        EMPSAL
+---------- --------------- ---------- ----------
+         1 Rahul           Pune            45000
+         4 Punam           Pune            60000
+
+SQL> select * from emp4 where empsal>30000;
+
+     EMPID EMPNAME         EMPCITY        EMPSAL
+---------- --------------- ---------- ----------
+         1 Rahul           Pune            45000
+         2 Priya           Mumbai        52000.5
+         3 Amit            Delhi        48000.75
+         4 Punam           Pune            60000
+
+SQL> select * from emp4 where empsal>50000;
+
+     EMPID EMPNAME         EMPCITY        EMPSAL
+---------- --------------- ---------- ----------
+         2 Priya           Mumbai        52000.5
+         4 Punam           Pune            60000
+
+SQL> select * from emp4 where empsal<50000;
+
+     EMPID EMPNAME         EMPCITY        EMPSAL
+---------- --------------- ---------- ----------
+         1 Rahul           Pune            45000
+         3 Amit            Delhi        48000.75
+
+SQL> select * from emp4 where empsal>=45000;
+
+     EMPID EMPNAME         EMPCITY        EMPSAL
+---------- --------------- ---------- ----------
+         1 Rahul           Pune            45000
+         2 Priya           Mumbai        52000.5
+         3 Amit            Delhi        48000.75
+         4 Punam           Pune            60000
+
+SQL> select * from emp4 where empsal<=45000;
+
+     EMPID EMPNAME         EMPCITY        EMPSAL
+---------- --------------- ---------- ----------
+         1 Rahul           Pune            45000
+
+SQL> select * from emp4 where empsal<>45000;
+
+     EMPID EMPNAME         EMPCITY        EMPSAL
+---------- --------------- ---------- ----------
+         2 Priya           Mumbai        52000.5
+         3 Amit            Delhi        48000.75
+         4 Punam           Pune            60000
+
+SQL> select * from emp4 where empsal>(select * from emp where empsal=5000);
+select * from emp4 where empsal>(select * from emp where empsal=5000)
+                                 *
+ERROR at line 1:
+ORA-00913: too many values
+
+
+SQL> select * from emp4 where empsal> all(select * from emp where empsal=5000);
+select * from emp4 where empsal> all(select * from emp where empsal=5000)
+                                     *
+ERROR at line 1:
+ORA-00913: too many values
+
+
+SQL> select * from emp4 where empsal> all (select * from emp where empsal=50000);
+select * from emp4 where empsal> all (select * from emp where empsal=50000)
+                                      *
+ERROR at line 1:
+ORA-00913: too many values
+
+
+SQL> select * from emp4 where empsal> all (select * from emp4 where empsal=50000);
+select * from emp4 where empsal> all (select * from emp4 where empsal=50000)
+                                      *
+ERROR at line 1:
+ORA-00913: too many values
+
+
+SQL> select * from emp4 where empsal> all (select * from emp4 where empsal=50000);
+select * from emp4 where empsal> all (select * from emp4 where empsal=50000)
+                                      *
+ERROR at line 1:
+ORA-00913: too many values
+
+
+SQL> select * from emp4 where empsal> all (select empsal from emp where empsal=50000);
+
+     EMPID EMPNAME         EMPCITY        EMPSAL
+---------- --------------- ---------- ----------
+         1 Rahul           Pune            45000
+         3 Amit            Delhi        48000.75
+         2 Priya           Mumbai        52000.5
+         4 Punam           Pune            60000
+
+SQL> select * from emp4 where empcity='Mumbai' and empsal>50000;
+
+     EMPID EMPNAME         EMPCITY        EMPSAL
+---------- --------------- ---------- ----------
+         2 Priya           Mumbai        52000.5
+
+SQL> select count(*) from emp;
+
+  COUNT(*)
+----------
+         7
+
+SQL> select count(*) from emp4;
+
+  COUNT(*)
+----------
+         4
+
+SQL> select count(ename) from emp4;
+select count(ename) from emp4
+             *
+ERROR at line 1:
+ORA-00904: "ENAME": invalid identifier
+
+
+SQL> select count(empname) from emp4;
+
+COUNT(EMPNAME)
+--------------
+             4
+
+SQL> select count(empcity) from emp4 where empcity='Pune';
+
+COUNT(EMPCITY)
+--------------
+             2
+
+SQL> select count(distinct empcity) from emp4;
+
+COUNT(DISTINCTEMPCITY)
+----------------------
+                     3
+
+SQL> select * from emp4 where empsal between 50000 and 60000;
+
+     EMPID EMPNAME         EMPCITY        EMPSAL
+---------- --------------- ---------- ----------
+         2 Priya           Mumbai        52000.5
+         4 Punam           Pune            60000
+
+SQL> select * from emp4 where empcity in ('Pune,'Mumbai');
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> select * from emp4 where empcity in ('Pune','Mumbai');
+
+     EMPID EMPNAME         EMPCITY        EMPSAL
+---------- --------------- ---------- ----------
+         1 Rahul           Pune            45000
+         2 Priya           Mumbai        52000.5
+         4 Punam           Pune            60000
+
+SQL> select * from emp4 where empcity like 'M%';
+
+     EMPID EMPNAME         EMPCITY        EMPSAL
+---------- --------------- ---------- ----------
+         2 Priya           Mumbai        52000.5
+
+SQL> select * from emp4 where empcity not like 'M%';
+
+     EMPID EMPNAME         EMPCITY        EMPSAL
+---------- --------------- ---------- ----------
+         1 Rahul           Pune            45000
+         3 Amit            Delhi        48000.75
+         4 Punam           Pune            60000
+
+SQL> select * from emp4 where empcity='Delhi' orempcity='Mumabi";
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> select * from emp4 where empcity='Delhi' orempcity='Mumabi';
+select * from emp4 where empcity='Delhi' orempcity='Mumabi'
+                                         *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select * from emp4 where empcity='Delhi' orempcity='Mumbai';
+select * from emp4 where empcity='Delhi' orempcity='Mumbai'
+                                         *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select * from emp4 where empcity='Delhi' or empcity='Mumbai';
+
+     EMPID EMPNAME         EMPCITY        EMPSAL
+---------- --------------- ---------- ----------
+         2 Priya           Mumbai        52000.5
+         3 Amit            Delhi        48000.75
+
+SQL> select * from emp4 where empsal> some (Select empsal from emp4 where empsal>50000);
+
+     EMPID EMPNAME         EMPCITY        EMPSAL
+---------- --------------- ---------- ----------
+         4 Punam           Pune            60000
+
+SQL> select sum(empsal) from emp4;
+
+SUM(EMPSAL)
+-----------
+  205001.25
+
+SQL> select * from emp4;
+
+     EMPID EMPNAME         EMPCITY        EMPSAL
+---------- --------------- ---------- ----------
+         1 Rahul           Pune            45000
+         2 Priya           Mumbai        52000.5
+         3 Amit            Delhi        48000.75
+         4 Punam           Pune            60000
+
+SQL> select sum(empsal) as "total salary" from emp4 where empsal>45000;
+
+total salary
+------------
+   160001.25
+
+SQL> select sum(distinct empsal) as "total salary" from emp4 where empsal>45000;
+
+total salary
+------------
+   160001.25
+
+SQL> select empcity,sum(distinct empsal) as "total salary" from emp4 group by empcity;;
+select empcity,sum(distinct empsal) as "total salary" from emp4 group by empcity;
+                                                                                *
+ERROR at line 1:
+ORA-00911: invalid character
+
+
+SQL> select empcity,sum(distinct empsal) as "total salary" from emp4 group by empcity;
+
+EMPCITY    total salary
+---------- ------------
+Pune             105000
+Delhi          48000.75
+Mumbai          52000.5
+
+SQL> select avg(empsal) from emp4;
+
+AVG(EMPSAL)
+-----------
+ 51250.3125
+
+SQL> select empcity,avg(distinct empsal) as "total salary" from emp4 group by empcity;
+
+EMPCITY    total salary
+---------- ------------
+Pune              52500
+Delhi          48000.75
+Mumbai          52000.5
+
+SQL> select min(empsal) from emp4;
+
+MIN(EMPSAL)
+-----------
+      45000
+
+SQL> select empcity,min(distinct empsal) as "total salary" from emp4 group by empcity;
+
+EMPCITY    total salary
+---------- ------------
+Pune              45000
+Delhi          48000.75
+Mumbai          52000.5
+
+SQL> select abs(-44) from dual;
+
+  ABS(-44)
+----------
+        44
+
+SQL> select power(2,4) from dual;
+
+POWER(2,4)
+----------
+        16
+
+SQL> select sqrt(16) from dual;
+
+  SQRT(16)
+----------
+         4
+
+SQL> select exp from dual;
+select exp from dual
+       *
+ERROR at line 1:
+ORA-00904: "EXP": invalid identifier
+
+
+SQL> select exp() from dual;
+select exp() from dual
+       *
+ERROR at line 1:
+ORA-00909: invalid number of arguments
+
+
+SQL> select exp(1) from dual;
+
+    EXP(1)
+----------
+2.71828183
+
+SQL> select round(4.5) from dual;
+
+ROUND(4.5)
+----------
+         5
+
+SQL> select trunc(153.275,2) from dual;
+
+TRUNC(153.275,2)
+----------------
+          153.27
+
+SQL> select mod(8,3) from dual;
+
+  MOD(8,3)
+----------
+         2
+
+SQL>
